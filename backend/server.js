@@ -23,7 +23,13 @@ async function startServer() {
 startServer();
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: [
+    'https://ai-travel-planner-seven-opal.vercel.app',
+    'http://localhost:3000' // Allow local development
+  ],
+  credentials: true
+}));
 app.use(express.json());
 
 // Request logging middleware
