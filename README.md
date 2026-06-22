@@ -1,53 +1,242 @@
 
 # AI Travel Planner
 
-A comprehensive, production-ready multi-user web application where users can create, customize, and save interactive travel itineraries using an AI LLM (Google Gemini). The application dynamically generates structured day-by-day itineraries, estimates realistic budgets, suggests hotels based on budget profiles, permits real-time editing, and includes an innovative AI Weather-Aware Packing Assistant.
+An intelligent travel planning application powered by Google Gemini AI. Plan your perfect trip with AI-generated itineraries, hotel recommendations, budget breakdowns, and a smart packing list.
 
 ## 🚀 Features
 
-- **AI-Powered Itinerary Generation**: Uses Google Gemini 2.5 Flash to create detailed day-by-day travel plans
-- **Budget Tracking**: Breaks down costs by accommodation, food, activities, and transport
-- **Hotel Recommendations**: AI suggests hotels based on destination and budget tier
-- **Dynamic Editing**: Add, remove, or regenerate specific activities on any day
-- **Weather-Aware Packing Assistant**: AI-generated packing list tailored to climate and activities
-- **Multi-User Support**: Secure authentication with JWT tokens and user data isolation
-- **Responsive Design**: Fully responsive UI built with Tailwind CSS
+- **AI-Powered Trip Generation**: Generate detailed day-by-day travel plans using Google Gemini
+- **Smart Budget Tracking**: See costs in INR with breakdown by category
+- **Hotel Recommendations**: Get personalized hotel suggestions for your destination
+- **Itinerary Management**: Create, edit, and customize your daily activities
+- **Packing Assistant**: AI-generated packing list with category organization
+- **User Authentication**: Secure login/registration system
+- **Trip Management**: Save, view, update, and delete your itineraries
 
-## 🛠️ Tech Stack
+## 📋 Tech Stack
 
 ### Backend
-- **Runtime**: Node.js (v18+ or v20+ LTS)
+- **Runtime**: Node.js
 - **Framework**: Express.js
-- **Database**: MongoDB (Mongoose ODM)
-- **Authentication**: JWT + bcryptjs
-- **AI/LLM**: Google Gemini 2.5 Flash API
-- **Language**: JavaScript/TypeScript
+- **Database**: MongoDB Atlas
+- **Authentication**: JWT (JSON Web Tokens)
+- **AI**: Google Gemini 2.5 Flash API
+- **ORM**: Mongoose
 
 ### Frontend
-- **Framework**: Next.js (App Router)
-- **UI Library**: React.js
-- **Styling**: Tailwind CSS
-- **HTTP Client**: Fetch API
+- **Framework**: Next.js 16.2.9
 - **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **Runtime**: React 19.2.4
 
-## 📋 Prerequisites
+## 🛠️ Installation
 
-Before you start, ensure you have:
-- **Node.js**: v18.x or v20.x LTS
-- **npm**: Bundled with Node.js
-- **MongoDB Atlas Account**: Free cloud-hosted cluster from [MongoDB Atlas](https://www.mongodb.com/cloud/atlas)
-- **Google Gemini API Key**: Free API key from [Google AI Studio](https://aistudio.google.com/apikey)
-- **Code Editor**: VS Code with ESLint & Prettier extensions (recommended)
+### Prerequisites
+- Node.js 16+
+- MongoDB Atlas account (cloud database)
+- Google Gemini API key
+- Git
 
-## ⚙️ Installation & Setup
+### Backend Setup
 
-### 1. Clone or Extract the Project
-
+1. **Navigate to backend directory:**
 ```bash
-cd ai-travel-planner
+cd backend
 ```
 
-### 2. Backend Setup
+2. **Install dependencies:**
+```bash
+npm install
+```
+
+3. **Create `.env` file:**
+```
+PORT=5000
+MONGODB_URI=your_mongodb_atlas_connection_string
+GEMINI_API_KEY=your_gemini_api_key
+JWT_SECRET=your_secret_key_for_jwt
+```
+
+4. **Start the server:**
+```bash
+npm start
+```
+
+Backend runs on `http://localhost:5000`
+
+### Frontend Setup
+
+1. **Navigate to frontend directory:**
+```bash
+cd frontend
+```
+
+2. **Install dependencies:**
+```bash
+npm install
+```
+
+3. **Create `.env.local` file:**
+```
+NEXT_PUBLIC_API_URL=http://localhost:5000
+```
+
+4. **Start development server:**
+```bash
+npm run dev
+```
+
+Frontend runs on `http://localhost:3000`
+
+## 🌐 Deployment
+
+### Backend Deployment (Render)
+✅ **Already Deployed at**: https://ai-travel-planner-iwrt.onrender.com
+
+### Frontend Deployment (Vercel)
+
+**Follow these steps:**
+
+1. **Push code to GitHub** (if not already done):
+```bash
+cd d:\AI-travelPlanner\ai-travel-planner
+git add .
+git commit -m "Prepare for Vercel deployment"
+git push origin main
+```
+
+2. **Deploy on Vercel**:
+   - Go to [vercel.com](https://vercel.com)
+   - Click "Add New" → "Project"
+   - Select your `ai-travel-planner` GitHub repository
+   - Configure:
+     - **Framework Preset**: Next.js
+     - **Root Directory**: `frontend`
+   - Click "Continue"
+
+3. **Add Environment Variables**:
+   - Click "Environment Variables"
+   - Add variable:
+     - **Name**: `NEXT_PUBLIC_API_URL`
+     - **Value**: `https://ai-travel-planner-iwrt.onrender.com`
+   - Click "Add"
+
+4. **Deploy**:
+   - Click "Deploy" button
+   - Wait for build to complete (3-5 minutes)
+   - Your frontend will be live at a Vercel URL
+
+## 🔐 Environment Variables
+
+### Backend `.env` (Render)
+| Variable | Description | Example |
+|----------|-------------|----------|
+| `PORT` | Server port | `5000` |
+| `MONGODB_URI` | MongoDB connection string | `mongodb+srv://...` |
+| `GEMINI_API_KEY` | Google Gemini API key | `AIza...` |
+| `JWT_SECRET` | JWT secret key | `your-secret-key` |
+
+### Frontend `.env.local` (Vercel)
+| Variable | Description | Example |
+|----------|-------------|----------|
+| `NEXT_PUBLIC_API_URL` | Backend API URL | `https://ai-travel-planner-iwrt.onrender.com` |
+
+## 📝 API Endpoints
+
+### Authentication
+- `POST /api/auth/register` - Register new user
+- `POST /api/auth/login` - Login user
+
+### Trips
+- `GET /api/trips` - Get all user trips
+- `GET /api/trips/:tripId` - Get specific trip
+- `POST /api/trips/generate` - Generate new trip with AI
+- `PUT /api/trips/:tripId` - Update trip
+- `DELETE /api/trips/:tripId` - Delete trip
+- `POST /api/trips/:tripId/regenerate-day/:dayNumber` - Regenerate specific day
+
+## 🚀 Usage
+
+1. **Register/Login**: Create your account or login
+2. **Create Trip**: Fill in destination, duration, budget, and interests
+3. **AI Generation**: Let Gemini AI create your itinerary
+4. **Customize**: Edit activities, hotels, and packing list
+5. **Save**: Your trips are automatically saved
+
+## 📦 Project Structure
+
+```
+ai-travel-planner/
+├── backend/
+│   ├── config/
+│   │   └── db.js
+│   ├── controllers/
+│   │   ├── authController.js
+│   │   └── tripController.js
+│   ├── middleware/
+│   │   └── auth.js
+│   ├── models/
+│   │   ├── User.js
+│   │   └── Trip.js
+│   ├── routes/
+│   │   ├── authRoutes.js
+│   │   └── tripRoutes.js
+│   ├── .env
+│   ├── .env.example
+│   ├── .gitignore
+│   ├── package.json
+│   └── server.js
+├── frontend/
+│   ├── app/
+│   │   ├── dashboard/
+│   │   ├── login/
+│   │   ├── register/
+│   │   ├── layout.tsx
+│   │   └── page.tsx
+│   ├── src/
+│   │   ├── components/
+│   │   ├── types/
+│   │   └── utils/
+│   ├── .env.example
+│   ├── .env.local
+│   ├── .gitignore
+│   ├── package.json
+│   ├── next.config.ts
+│   └── tsconfig.json
+├── .gitignore
+└── README.md
+```
+
+## 🐛 Troubleshooting
+
+### Vercel Deployment Issues
+- **Build fails**: Check that `NEXT_PUBLIC_API_URL` is set in Vercel environment variables
+- **API calls fail**: Verify the backend URL is correct and backend is running
+- **CORS issues**: Ensure backend allows requests from your Vercel domain
+
+### Frontend Build Errors
+- Clear `.next/` folder: `rm -rf .next`
+- Delete `node_modules` and reinstall: `npm install`
+- Check `NEXT_PUBLIC_API_URL` is set correctly
+
+### Backend Connection Issues
+- Verify MongoDB URI is correct
+- Check Gemini API key is valid
+- Ensure JWT_SECRET is set
+- Backend must be running before frontend API calls
+
+## 📄 License
+
+MIT
+
+## 🤝 Support
+
+For issues and questions, please open a GitHub issue in the repository.
+
+---
+
+**Made with ❤️ by AI Travel Planner Team**
+
 
 Navigate to the backend directory:
 
