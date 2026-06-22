@@ -38,6 +38,17 @@ app.use((req, res, next) => {
   next();
 });
 
+// Test route - Root endpoint
+app.get('/', (req, res) => {
+  res.status(200).json({ 
+    message: '✅ AI Travel Planner Backend is Running!',
+    status: 'Online',
+    timestamp: new Date().toISOString(),
+    environment: process.env.NODE_ENV || 'development',
+    version: '1.0.0'
+  });
+});
+
 // Health check route
 app.get('/health', (req, res) => {
   res.status(200).json({ message: 'Server is running' });
